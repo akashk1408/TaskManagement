@@ -11,9 +11,9 @@ A production-quality React Native task management application with secure authen
 - ✅ Form validation with user-friendly error messages
 - ✅ Secure token storage using Expo SecureStore
 - ✅ Pre-configured users:
-  - Admin: `admin@example.com` (password: any 6+ characters)
-  - User 1: `user1@example.com` (password: any 6+ characters)
-  - User 2: `user2@example.com` (password: any 6+ characters)
+  - Admin: `tarunkrish2001@gmail.com` (password: 123456)
+  - User 1: `akash900385@gmail.com` (password: akash123)
+  - User 2: `ashokkumar141199@gmail.com` (password: ashok123)
 
 #### 2. Navigation
 - ✅ React Navigation with Native Stack Navigator
@@ -150,16 +150,16 @@ A production-quality React Native task management application with secure authen
 You can use these pre-configured accounts:
 
 - **Admin:**
-  - Email: `admin@example.com`
-  - Password: Any password with 6+ characters
+  - Email: `tarunkrish2001@gmail.com`
+  - Password: 123456
 
 - **User 1:**
-  - Email: `user1@example.com`
-  - Password: Any password with 6+ characters
+  - Email: `akash900385@gmail.com`
+  - Password: akash123
 
 - **User 2:**
-  - Email: `user2@example.com`
-  - Password: Any password with 6+ characters
+  - Email: `ashokkumar141199@gmail.com`
+  - Password: ashok123
 
 Or create a new account using the Sign Up screen.
 
