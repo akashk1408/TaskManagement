@@ -3,12 +3,30 @@ import { storage } from './storage';
 import { syncService } from './sync';
 
 export const taskService = {
-  async getAllTasks(userId: string): Promise<Task[]> {
+  /**
+   * getAllTasks() - Fetch ALL tasks without filtering by userId
+   * All users will see all tasks in the system
+   */
+  async getAllTasks(): Promise<Task[]> {
+    try {
+      const tasks = await storage.getTasks();
+      return tasks; // Return all tasks without filtering
+    } catch (error) {
+      console.error('Error getting tasks:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * getTasksByUserId(userId) - OPTIONAL: Keep for specific user filtering if needed
+   * This can be used for user-specific views if required
+   */
+  async getTasksByUserId(userId: string): Promise<Task[]> {
     try {
       const tasks = await storage.getTasks();
       return tasks.filter((task) => task.userId === userId);
     } catch (error) {
-      console.error('Error getting tasks:', error);
+      console.error('Error getting user tasks:', error);
       throw error;
     }
   },
@@ -188,4 +206,3 @@ export const taskService = {
     });
   },
 };
-

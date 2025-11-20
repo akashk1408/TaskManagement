@@ -6,7 +6,7 @@ import { taskService } from '../services/tasks'; // keep existing service (fallb
 import { Task, TaskState, TaskStatus } from '../types';
 
 interface TaskStore extends TaskState {
-  fetchTasks: (userId: string) => Promise<void>;
+  fetchTasks: () => Promise<void>; // Removed userId parameter
   createTask: (
     title: string,
     description: string,
@@ -17,7 +17,7 @@ interface TaskStore extends TaskState {
   deleteTask: (taskId: string) => Promise<void>;
   toggleTaskComplete: (taskId: string) => Promise<void>;
   updateTaskStatus: (taskId: string, status: TaskStatus) => Promise<void>;
-  syncTasks: (userId: string) => Promise<void>;
+  syncTasks: () => Promise<void>; // Removed userId parameter
   filterTasks: (
     searchQuery: string,
     sortBy: 'assignedDate' | 'dueDate' | 'title',
@@ -30,14 +30,15 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   isLoading: false,
   error: null,
 
-  // FETCH
-  fetchTasks: async (userId: string) => {
+  // FETCH ALL TASKS (no userId filtering)
+  fetchTasks: async () => {
+    debugger;
     try {
       set({ isLoading: true, error: null });
 
-      // prefer firestoreService
+      // prefer firestoreService - fetch ALL tasks
       try {
-        const tasks = await firestoreService.fetchTasks(userId);
+        const tasks = await firestoreService.fetchAllTasks(); // Fetch all tasks
         set({ tasks, isLoading: false });
         return;
       } catch (fsErr) {
@@ -45,7 +46,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
         // continue to fallback
       }
 
-      const tasks = await taskService.getAllTasks(userId);
+      const tasks = await taskService.getAllTasks(); // Remove userId parameter
       set({ tasks, isLoading: false });
     } catch (error) {
       set({
@@ -208,8 +209,8 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
     }
   },
 
-  // SYNC
-  syncTasks: async (userId: string) => {
+  // SYNC ALL TASKS
+  syncTasks: async () => {
     try {
       set({ isLoading: true, error: null });
       const isOnline = await syncService.checkConnectivity();
